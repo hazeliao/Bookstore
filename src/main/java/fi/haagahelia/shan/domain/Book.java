@@ -1,13 +1,45 @@
 package fi.haagahelia.shan.domain;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Book {
+	@Id	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	
-	@NotNull
 	private String title, author, isbn;
 	private int year;
 	private double price;
+	
+	public Book ()	{}	
+	
+	public Book (long id,String title, String author, String isbn, int year, double price){			
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.year = year;
+		this.price = price;
+	}
+	
+	public Book ( String author, String title, String isbn, int year){		
+		this.author = author;
+		this.title = title;
+		this.isbn = isbn;
+		this.year = year;		
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
