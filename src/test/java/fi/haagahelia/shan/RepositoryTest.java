@@ -1,6 +1,7 @@
 package fi.haagahelia.shan;
-
+import static org.junit.Assert.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -9,6 +10,10 @@ import java.util.List;
 
 
 
+
+
+
+import javax.transaction.Transactional;
 
 import org.h2.store.Data;
 import org.junit.Test;
@@ -49,16 +54,15 @@ public class RepositoryTest {
 	}
 	
 	@Test
-	public void createNewBook(){
+	public void createAndDeleteNewBook(){
 		Book book = new Book("James Smith", "World History", "10001255-21", 2016, 22.3 );
 		brepository.save(book);
 		assertThat(book.getId()).isNotNull();
 		brepository.delete(book.getId());
-		assertThat(book.getId()).isNull();
+		assertFalse(brepository.exists(book.getId()));
 		
 	}
-	
-	
+		
 	
 	@Test
 	public void findByRoleShouldReturnUser(){		
@@ -69,12 +73,13 @@ public class RepositoryTest {
 	}
 	
 	@Test
-	public void createNewUser(){
+	public void createAndDeleteNewUser(){
 		User user= new User("user4", "gooe@email.com", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6","USER2" );
 		urepository.save(user);
 		assertThat(user.getId()).isNotNull();
 		urepository.delete(user);
-		assertThat(user.getId()).isNull();
+		assertFalse(urepository.exists(user.getId()));
+		//assertThat(user.getId()).isNull();---not working
 	}
 	
 	
