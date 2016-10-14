@@ -24,7 +24,7 @@ public class Book {
 	private Category category;
 	public Book ()	{}	
 	
-	public Book (long id,String title, String author, String isbn, int year, double price){			
+	public Book (String title, String author, String isbn, int year, double price){			
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
